@@ -14,7 +14,7 @@ All classes assume the following controller layout:
 * `S` - Start.
 * `T` - Select/Option/Back.
 
-Subclasses are responsible to handle mapping of keys or gamepad buttons to the actions above.
+Subclasses are responsible for mapping keys or gamepad buttons to the actions above.
 
 ## Class: `BaseInput`
 
