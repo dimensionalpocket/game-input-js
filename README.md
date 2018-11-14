@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/pauloddr/fightron-inputs.svg?branch=master)](https://travis-ci.com/pauloddr/fightron-inputs)
 [![Coverage Status](https://coveralls.io/repos/github/pauloddr/fightron-inputs/badge.svg?branch=master)](https://coveralls.io/github/pauloddr/fightron-inputs?branch=master)
 
-Classes in this repository handle input manipulation from different controllers.
+This repository stores classes that handle input manipulation from different controllers.
 
 ## Controller Layout
 
@@ -68,10 +68,6 @@ Event values are case-sensitive.
 |`"7"`|Up-Left directional position|
 |`"9"`|Up-Right directional position|
 
-### Input Buffer
-
-(TBD)
-
 ## Class: `KeyboardInput`
 
 This handler maps keyboard keys to the proper actions.
@@ -81,6 +77,12 @@ It relies on the `event.code` property, falling back to `event.which` and `event
 It also handles `keydown` events internally to avoid "input spamming" when the key is held down.
 
 It has a default ID of `"K"`.
+
+It requires a `window` object in its constructor:
+
+```js
+var keyboard = new KeyboardInput(window)
+```
 
 Default mappings:
 
@@ -120,13 +122,13 @@ Default mappings:
 * `Numpad5` - B
 * `Numpad6` - C
 * `NumpadEnter` - Start
-* `Numpad+` - Select/Option
+* `NumpadSubtract` - Select/Option
 
 ## Gamepad Support and Contributions
 
 This repository stores the default definitions of known gamepads. As an open-source repository, it allows contributions from other developers and players that would like to add support to different gaming controllers.
 
-As of now, gamepad support is not available.
+As of now, gamepad support is not yet available.
 
 ## Q&A
 
