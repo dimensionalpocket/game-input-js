@@ -133,23 +133,14 @@ var sequence = new InputSequence('236A')
 sequence.register('2')
 sequence.register('3')
 sequence.register('6')
-sequence.register('A', {buffer: 5 /* frames */ })
-sequence.onComplete = () => {
-  console.log('Hadouken!')
-}
+sequence.register('A')
 
-// Feed events into the instance
-sequence.feed('2')
-sequence.feed('3')
-sequence.feed('6')
-sequence.feed('A') // callback will fire!
-
-// Feed events within the given buffers!
-sequence.feed('2')
-sequence.feed('3')
-sequence.feed('6')
-// then wait more than 5 frames...
-sequence.feed('A') // callback will NOT fire as it took too long!
+// Feed events into the instance.
+// It will return true once the sequence completes.
+sequence.feed('2') // false
+sequence.feed('3') // false
+sequence.feed('6') // false
+sequence.feed('A') // true
 ```
 
 ## Class: `InputRouter`
@@ -172,12 +163,13 @@ sequence4.priority = 0
 var router = new InputRouter()
 router.register(sequence1, sequence2, sequence3, sequence4)
 
-// Feed events to all sequences until complete sequences are captured
-router.feed('2') // not captured
-router.feed('1') // not captured
-router.feed('4') // not captured
-router.feed('A') // captured by sequence2
-router.feed('B') // captured by sequence4
+// Feed events to all sequences until complete sequences are captured.
+// The ID of the sequence will be returned on capture, false otherwise.
+router.feed('2') // false
+router.feed('1') // false
+router.feed('4') // false
+router.feed('A') // '236A'
+router.feed('B') // 'B'
 ```
 
 ## Gamepad Support and Contributions
