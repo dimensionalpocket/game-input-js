@@ -17,7 +17,9 @@
     "url": "https://github.com/pauloddr/fightron-inputs/issues"
   },
   "homepage": "https://github.com/pauloddr/fightron-inputs#readme",
+  "dependencies": {},
   "devDependencies": {
+    "@fightron/utils": "github:pauloddr/fightron-utils",
     "chai": "4.2.0",
     "coveralls": "3.0.3",
     "dirty-chai": "2.0.1",
@@ -41,5 +43,8 @@
       "text-summary",
       "html"
     ]
+  },
+  "engines": {
+    "node": ">= 10.0.0"
   }
 }

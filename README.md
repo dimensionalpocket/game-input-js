@@ -124,6 +124,62 @@ Default mappings:
 * `NumpadEnter` - Start
 * `NumpadSubtract` - Select/Option
 
+## Class: `InputSequence`
+
+`InputSequence` instances watch input events and fire callbacks when all events from the sequence are executed in order.
+
+```js
+var sequence = new InputSequence('236A')
+sequence.register('2')
+sequence.register('3')
+sequence.register('6')
+sequence.register('A', {buffer: 5 /* frames */ })
+sequence.onComplete = () => {
+  console.log('Hadouken!')
+}
+
+// Feed events into the instance
+sequence.feed('2')
+sequence.feed('3')
+sequence.feed('6')
+sequence.feed('A') // callback will fire!
+
+// Feed events within the given buffers!
+sequence.feed('2')
+sequence.feed('3')
+sequence.feed('6')
+// then wait more than 5 frames...
+sequence.feed('A') // callback will NOT fire as it took too long!
+```
+
+## Class: `InputRouter`
+
+An `InputRouter` instance assembles many `InputSequence` instances together and sorts them by priority.
+
+```js
+var sequence1 = new InputSequence('236A')
+var sequence2 = new InputSequence('214A')
+var sequence3 = new InputSequence('236236A')
+var sequence4 = new InputSequence('B')
+
+// Assign each sequence a priority.
+// Higher priority sequences get executed first.
+sequence1.priority = 5
+sequence2.priority = 5
+sequence3.priority = 10
+sequence4.priority = 0
+
+var router = new InputRouter()
+router.register(sequence1, sequence2, sequence3, sequence4)
+
+// Feed events to all sequences until complete sequences are captured
+router.feed('2') // not captured
+router.feed('1') // not captured
+router.feed('4') // not captured
+router.feed('A') // captured by sequence2
+router.feed('B') // captured by sequence4
+```
+
 ## Gamepad Support and Contributions
 
 This repository stores the default definitions of known gamepads. As an open-source repository, it allows contributions from other developers and players that would like to add support to different gaming controllers.

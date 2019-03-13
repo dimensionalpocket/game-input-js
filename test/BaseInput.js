@@ -1,5 +1,6 @@
 import { expect } from 'chai'
-import { DIRECTIONS, BUTTONS, BaseInput } from '../lib/BaseInput'
+import { BaseInput } from '../lib/BaseInput'
+import { DIRECTIONS, BUTTONS } from '../lib/constants'
 
 var events = []
 function dispatcher (handler, event) { events.unshift([handler.id, event]) }
