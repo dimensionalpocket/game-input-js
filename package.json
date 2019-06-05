@@ -21,7 +21,7 @@
   "devDependencies": {
     "@fightron/utils": "github:pauloddr/fightron-utils",
     "chai": "4.2.0",
-    "coveralls": "3.0.3",
+    "coveralls": "3.0.4",
     "dirty-chai": "2.0.1",
     "esm": "3.2.25",
     "jsdom": "15.1.1",
