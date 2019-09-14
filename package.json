@@ -27,7 +27,7 @@
     "jsdom": "15.1.1",
     "mocha": "6.2.0",
     "nyc": "14.1.1",
-    "standard": "14.2.0"
+    "standard": "14.3.0"
   },
   "standard": {
     "env": "mocha"
