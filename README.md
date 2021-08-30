@@ -1,9 +1,8 @@
-# @fightron/inputs
+# @dimensionalpocket/game-input
 
-[![Build Status](https://travis-ci.com/pauloddr/fightron-inputs.svg?branch=master)](https://travis-ci.com/pauloddr/fightron-inputs)
-[![Coverage Status](https://coveralls.io/repos/github/pauloddr/fightron-inputs/badge.svg?branch=master)](https://coveralls.io/github/pauloddr/fightron-inputs?branch=master)
+[![build](https://github.com/dimensionalpocket/game-input-js/actions/workflows/node.js.yml/badge.svg)](https://github.com/dimensionalpocket/game-input-js/actions/workflows/node.js.yml) [![Total alerts](https://img.shields.io/lgtm/alerts/g/dimensionalpocket/game-input-js.svg)](https://lgtm.com/projects/g/dimensionalpocket/game-input-js/alerts/) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/dimensionalpocket/game-input-js.svg)](https://lgtm.com/projects/g/dimensionalpocket/game-input-js/context:javascript)
 
-This repository stores classes that handle input manipulation from different controllers.
+This repository provides classes to parse input from different controllers, parsing it into a common format.
 
 ## Controller Layout
 

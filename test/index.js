@@ -1,9 +1,9 @@
-import { expect } from 'chai'
-import { KeyboardInput, NumpadInput } from '../'
+import { expect } from '@dimensionalpocket/development'
+import { KeyboardInput, NumpadInput } from '../index.js'
 
 describe('index', function () {
   it('exports proper classes', function () {
-    expect(KeyboardInput).to.exist()
-    expect(NumpadInput).to.exist()
+    expect(KeyboardInput).to.exist
+    expect(NumpadInput).to.exist
   })
 })

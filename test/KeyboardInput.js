@@ -1,11 +1,11 @@
-import { expect } from 'chai'
+import { expect } from '@dimensionalpocket/development'
 import { JSDOM } from 'jsdom'
-import { KeyboardInput } from '../lib/KeyboardInput'
+import { KeyboardInput } from '../src/KeyboardInput.js'
 
 var events = []
 function dispatcher (handler, event) { events.unshift([handler.id, event]) }
 
-var dom = new JSDOM(``, {})
+var dom = new JSDOM('', {})
 var windowInstance = dom.window
 
 function event (eventName, code, options) {

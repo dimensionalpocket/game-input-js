@@ -1,6 +1,6 @@
 'use strict'
 
-import { DIRECTIONS } from './constants'
+import { DIRECTIONS } from './constants.js'
 
 export class BaseInput {
   constructor () {

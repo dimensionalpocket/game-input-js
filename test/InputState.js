@@ -1,6 +1,6 @@
-import { expect } from 'chai'
-import { InputState } from '../lib/InputState'
-import { ALL_INPUTS } from '../lib/constants'
+import { expect } from '@dimensionalpocket/development'
+import { InputState } from '../src/InputState.js'
+import { ALL_INPUTS } from '../src/constants.js'
 
 describe('InputState', function () {
   describe('constructor', function () {

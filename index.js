@@ -1,4 +1,4 @@
-import { KeyboardInput } from './lib/KeyboardInput'
-import { NumpadInput } from './lib/NumpadInput'
+import { KeyboardInput } from './src/KeyboardInput.js'
+import { NumpadInput } from './src/NumpadInput.js'
 
 export { KeyboardInput, NumpadInput }

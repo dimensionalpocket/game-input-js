@@ -1,6 +1,6 @@
 'use strict'
 
-import { ALL_INPUTS } from './constants'
+import { ALL_INPUTS } from './constants.js'
 
 export class InputState {
   constructor (initial) {

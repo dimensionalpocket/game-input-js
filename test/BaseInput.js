@@ -1,6 +1,6 @@
-import { expect } from 'chai'
-import { BaseInput } from '../lib/BaseInput'
-import { DIRECTIONS, BUTTONS } from '../lib/constants'
+import { expect } from '@dimensionalpocket/development'
+import { BaseInput } from '../src/BaseInput.js'
+import { DIRECTIONS, BUTTONS } from '../src/constants.js'
 
 var events = []
 function dispatcher (handler, event) { events.unshift([handler.id, event]) }

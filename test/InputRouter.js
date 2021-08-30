@@ -1,7 +1,7 @@
-import { expect } from 'chai'
-import { InputRouter } from '../lib/InputRouter'
-import { InputSequence } from '../lib/InputSequence'
-import { Counter } from '@fightron/utils/Counter'
+import { expect } from '@dimensionalpocket/development'
+import { InputRouter } from '../src/InputRouter.js'
+import { InputSequence } from '../src/InputSequence.js'
+import { Counter } from '../src/Counter.js'
 import {
   DIRECTION_NEUTRAL,
   DIRECTION_LEFT,
@@ -10,7 +10,7 @@ import {
   DIRECTION_DOWN_RIGHT,
   BUTTON_A,
   DIRECTION_DOWN_LEFT
-} from '../lib/constants'
+} from '../src/constants.js'
 
 describe('InputRouter', function () {
   before(function () {
@@ -20,7 +20,6 @@ describe('InputRouter', function () {
     this.s236A.register(DIRECTION_DOWN_RIGHT)
     this.s236A.register(DIRECTION_RIGHT)
     this.s236A.register(BUTTON_A)
-    this.s236A.priority = 5
     this.s236236A = new InputSequence('236236A')
     this.s236236A.register(DIRECTION_DOWN)
     this.s236236A.register(DIRECTION_DOWN_RIGHT)
@@ -29,21 +28,23 @@ describe('InputRouter', function () {
     this.s236236A.register(DIRECTION_DOWN_RIGHT)
     this.s236236A.register(DIRECTION_RIGHT)
     this.s236236A.register(BUTTON_A)
-    this.s236236A.priority = 10
     this.s6 = new InputSequence('6')
     this.s6.register(DIRECTION_RIGHT)
-    this.s6.priority = 3
     this.s4 = new InputSequence('4')
     this.s4.register(DIRECTION_LEFT)
-    this.s4.priority = 2
     this.s5 = new InputSequence('5')
     this.s5.register(DIRECTION_NEUTRAL)
     this.router = new InputRouter()
+    this.s236236A.priority = 10
+    this.s236A.priority = 5
+    this.s6.priority = 3
+    this.s4.priority = 2
     this.router.register(this.s5)
     this.router.register(this.s6)
     this.router.register(this.s4)
     this.router.register(this.s236A)
     this.router.register(this.s236236A)
+
     this.router.counter = this.counter
   })
 
