@@ -1,11 +1,11 @@
-import { expect } from 'chai'
+import { expect } from '@dimensionalpocket/development'
 import { JSDOM } from 'jsdom'
-import { NumpadInput } from '../lib/NumpadInput'
+import { NumpadInput } from '../src/NumpadInput.js'
 
 var events = []
 function dispatcher (handler, event) { events.unshift([handler.id, event]) }
 
-var dom = new JSDOM(``, {})
+var dom = new JSDOM('', {})
 var windowInstance = dom.window
 
 function event (eventName, code, options) {

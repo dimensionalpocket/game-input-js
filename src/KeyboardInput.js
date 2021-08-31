@@ -1,7 +1,7 @@
 'use strict'
 
-import { KeyCodes } from './KeyCodes'
-import { BaseInput } from './BaseInput'
+import { KeyCodes } from './KeyCodes.js'
+import { BaseInput } from './BaseInput.js'
 
 export class KeyboardInput extends BaseInput {
   constructor (windowInstance) {

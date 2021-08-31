@@ -1,6 +1,6 @@
 'use strict'
 
-import { REVERSIBLE_DIRECTIONS, OPPOSITES } from './constants'
+import { REVERSIBLE_DIRECTIONS, OPPOSITES } from './constants.js'
 
 export class InputRouter {
   constructor () {
@@ -48,5 +48,5 @@ export class InputRouter {
 }
 
 function sortByPriority (a, b) {
-  return a.priority < b.priority
+  return b.priority - a.priority
 }

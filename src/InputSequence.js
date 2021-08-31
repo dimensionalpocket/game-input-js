@@ -1,7 +1,7 @@
 'use strict'
 
-import { InputSequenceStep } from './InputSequenceStep'
-import { DIRECTION_NEUTRAL } from './constants'
+import { InputSequenceStep } from './InputSequenceStep.js'
+import { DIRECTION_NEUTRAL } from './constants.js'
 
 export class InputSequence {
   constructor (id) {
@@ -9,7 +9,7 @@ export class InputSequence {
     this.steps = []
     this.next = null // next step
     this.modifier = 1 // skill performance modifier
-    this.priority = 0 // skill priority in InputRouter (higher run first)
+    this.priority = 0 // skill priority in InputRouter (higher runs first)
     this.pristine = false
     this._counter = null
   }

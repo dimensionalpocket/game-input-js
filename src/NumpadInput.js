@@ -1,6 +1,6 @@
 'use strict'
 
-import { KeyboardInput } from './KeyboardInput'
+import { KeyboardInput } from './KeyboardInput.js'
 
 export class NumpadInput extends KeyboardInput {
   constructor (windowInstance) {

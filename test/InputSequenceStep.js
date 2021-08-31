@@ -1,6 +1,6 @@
-import { Counter } from '@fightron/utils/Counter'
-import { expect } from 'chai'
-import { InputSequenceStep } from '../lib/InputSequenceStep'
+import { expect } from '@dimensionalpocket/development'
+import { Counter } from '../src/Counter.js'
+import { InputSequenceStep } from '../src/InputSequenceStep.js'
 import {
   ALL_INPUTS,
   BUTTON_A,
@@ -15,7 +15,7 @@ import {
   DIRECTION_UP_RIGHT,
   DIRECTION_UP,
   DIRECTION_NEUTRAL
-} from '../lib/constants'
+} from '../src/constants.js'
 
 describe('InputSequenceStep', function () {
   before(function () {

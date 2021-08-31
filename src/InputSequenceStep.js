@@ -1,6 +1,6 @@
 'use strict'
 
-import { InputState } from './InputState'
+import { InputState } from './InputState.js'
 
 export class InputSequenceStep {
   constructor () {
