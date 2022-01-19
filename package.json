@@ -23,7 +23,7 @@
   "dependencies": {},
   "devDependencies": {
     "@dimensionalpocket/development": "github:dimensionalpocket/development-js#0.4.1",
-    "@dimensionalpocket/release": "github:dimensionalpocket/release-js#0.2.2",
+    "@dimensionalpocket/release": "github:dimensionalpocket/release-js#0.2.3",
     "jsdom": "18.1.1"
   },
   "babel": {
