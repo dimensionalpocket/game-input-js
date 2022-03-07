@@ -1,3 +1,5 @@
+// @ts-check
+
 // Base class used by mostly everything.
 export class Base {
   constructor () {

@@ -1,3 +1,5 @@
+// @ts-check
+
 'use strict'
 
 import { KeyboardInput } from './KeyboardInput.js'

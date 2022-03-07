@@ -1,3 +1,5 @@
+// @ts-check
+
 'use strict'
 
 import { ALL_INPUTS } from './constants.js'

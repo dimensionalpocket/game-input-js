@@ -1,3 +1,7 @@
+// @ts-check
+
+'use strict'
+
 import { expect } from '@dimensionalpocket/development'
 import { JSDOM } from 'jsdom'
 import { NumpadInput } from '../src/NumpadInput.js'
@@ -11,7 +15,9 @@ var windowInstance = dom.window
 function event (eventName, code, options) {
   options = options || {}
   Object.assign(options, { code })
+  // @ts-ignore
   var evt = new windowInstance.KeyboardEvent(eventName, options)
+  // @ts-ignore
   return windowInstance.dispatchEvent(evt)
 }
 

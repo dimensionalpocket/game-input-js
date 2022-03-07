@@ -1,3 +1,7 @@
+// @ts-check
+
+'use strict'
+
 import { expect } from '@dimensionalpocket/development'
 import { InputRouter } from '../src/InputRouter.js'
 import { InputSequence } from '../src/InputSequence.js'

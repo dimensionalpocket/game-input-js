@@ -1,3 +1,7 @@
+// @ts-check
+
+'use strict'
+
 export const DIRECTION_LEFT = '4'
 export const DIRECTION_DOWN = '2'
 export const DIRECTION_RIGHT = '6'

@@ -177,14 +177,6 @@ This repository stores the default definitions of known gamepads. As an open-sou
 
 As of now, gamepad support is not yet available.
 
-## Q&A
-
-### Why not inherit from `EventEmitter` instead of overwriting the `dispatch` function?
-
-Short answer: performance.
-
-Long answer: inputs are speed-sensitive. There are a lot of things that interfere with input delay, and we don't want to add another layer of complexity on top of everything else.
-
 ## License
 
 MIT
