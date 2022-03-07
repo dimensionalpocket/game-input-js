@@ -1,3 +1,5 @@
+// @ts-check
+
 'use strict'
 
 import { REVERSIBLE_DIRECTIONS, OPPOSITES } from './constants.js'

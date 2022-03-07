@@ -1,3 +1,5 @@
+// @ts-check
+
 'use strict'
 
 import { DIRECTIONS } from './constants.js'

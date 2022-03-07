@@ -1,3 +1,5 @@
+// @ts-check
+
 'use strict'
 
 import { InputSequenceStep } from './InputSequenceStep.js'

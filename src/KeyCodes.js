@@ -1,3 +1,5 @@
+// @ts-check
+
 'use strict'
 
 // Maps each key number to its code string.

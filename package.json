@@ -1,12 +1,11 @@
 {
   "name": "@dimensionalpocket/game-input",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "GameInput object to parse controller input in Javascript games",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "npm run lint && NODE_ENV=test c8 mocha",
-    "test:ci": "NODE_ENV=test mocha",
     "lint": "standardx --fix --verbose",
     "release": "release-it --config ./node_modules/@dimensionalpocket/release/config/default.js"
   },
@@ -22,8 +21,8 @@
   "homepage": "https://github.com/dimensionalpocket/game-input-js#readme",
   "dependencies": {},
   "devDependencies": {
-    "@dimensionalpocket/development": "github:dimensionalpocket/development-js#0.4.2",
-    "@dimensionalpocket/release": "github:dimensionalpocket/release-js#0.2.3",
+    "@dimensionalpocket/development": "github:dimensionalpocket/development-js#0.5.2",
+    "@dimensionalpocket/release": "github:dimensionalpocket/release-js#0.2.4",
     "jsdom": "19.0.0"
   },
   "babel": {
@@ -38,7 +37,7 @@
     "colors": true
   },
   "c8": {
-    "all": true,
+    "extends": "./node_modules/@dimensionalpocket/development/c8/default.json",
     "include": [
       "index.js",
       "src"

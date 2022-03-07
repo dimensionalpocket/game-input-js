@@ -1,3 +1,7 @@
+// @ts-check
+
+'use strict'
+
 import { expect } from '@dimensionalpocket/development'
 import { JSDOM } from 'jsdom'
 import { KeyboardInput } from '../src/KeyboardInput.js'
@@ -6,12 +10,17 @@ var events = []
 function dispatcher (handler, event) { events.unshift([handler.id, event]) }
 
 var dom = new JSDOM('', {})
+
 var windowInstance = dom.window
 
 function event (eventName, code, options) {
   options = options || {}
   Object.assign(options, { code })
+
+  // @ts-ignore
   var evt = new windowInstance.KeyboardEvent(eventName, options)
+
+  // @ts-ignore
   return windowInstance.dispatchEvent(evt)
 }
 
@@ -42,9 +51,9 @@ describe('KeyboardInput', function () {
       expect(events).to.have.length(0)
       event('keyup', undefined, 0)
       expect(events).to.have.length(0)
-      event('keydown', undefined, undefined, 0)
+      event('keydown', undefined, undefined)
       expect(events).to.have.length(0)
-      event('keyup', undefined, undefined, 0)
+      event('keyup', undefined, undefined)
       expect(events).to.have.length(0)
     })
 
@@ -82,8 +91,10 @@ describe('KeyboardInput', function () {
 
     it('calls preventDefault() on event', function () {
       var prevented = false
+      // @ts-ignore
       var evt = new windowInstance.KeyboardEvent('keydown', { code: 'KeyW' })
       evt.preventDefault = () => { prevented = true }
+      // @ts-ignore
       windowInstance.dispatchEvent(evt)
       expect(prevented).to.equal(true)
       event('keyup', 'KeyW') // reset state
@@ -161,6 +172,7 @@ describe('KeyboardInput', function () {
   describe('#onWindowBlur', function () {
     before(function () {
       event('keydown', 'KeyW')
+      // @ts-ignore
       windowInstance.dispatchEvent(new windowInstance.FocusEvent('blur'))
     })
 

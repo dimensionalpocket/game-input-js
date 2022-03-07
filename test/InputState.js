@@ -1,3 +1,7 @@
+// @ts-check
+
+'use strict'
+
 import { expect } from '@dimensionalpocket/development'
 import { InputState } from '../src/InputState.js'
 import { ALL_INPUTS } from '../src/constants.js'

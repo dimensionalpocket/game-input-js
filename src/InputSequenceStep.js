@@ -1,3 +1,5 @@
+// @ts-check
+
 'use strict'
 
 import { InputState } from './InputState.js'

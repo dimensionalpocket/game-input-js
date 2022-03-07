@@ -1,3 +1,7 @@
+// @ts-check
+
+'use strict'
+
 import { Base } from './Base.js'
 
 const DEFAULT_INTERVAL = 1000 / 60 // 60 FPS
@@ -16,6 +20,7 @@ export class Counter extends Base {
 
   next () {
     ++this.current
+    // @ts-ignore
     this.onChange(this)
   }
 
