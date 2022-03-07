@@ -37,7 +37,7 @@
     "colors": true
   },
   "c8": {
-    "all": true,
+    "extends": "./node_modules/@dimensionalpocket/development/c8/default.json",
     "include": [
       "index.js",
       "src"
