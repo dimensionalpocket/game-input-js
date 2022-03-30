@@ -21,7 +21,7 @@
   "homepage": "https://github.com/dimensionalpocket/game-input-js#readme",
   "dependencies": {},
   "devDependencies": {
-    "@dimensionalpocket/development": "github:dimensionalpocket/development-js#0.5.3",
+    "@dimensionalpocket/development": "github:dimensionalpocket/development-js#0.6.1",
     "@dimensionalpocket/release": "github:dimensionalpocket/release-js#0.2.4",
     "jsdom": "19.0.0"
   },
