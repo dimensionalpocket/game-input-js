@@ -27,7 +27,7 @@ function event (eventName, code, options) {
 describe('KeyboardInput', function () {
   before(function () {
     this.input = new KeyboardInput(windowInstance)
-    this.input.dispatch = dispatcher
+    this.input.on('input', dispatcher)
   })
 
   after(function () {
@@ -42,7 +42,7 @@ describe('KeyboardInput', function () {
   })
 
   describe('#capture', function () {
-    it('does not dispatch event for invalid codes', function () {
+    it('does not emit event for invalid codes', function () {
       event('keydown', 'DONOTEXIST')
       expect(events).to.have.length(0)
       event('keyup', 'DONOTEXIST')

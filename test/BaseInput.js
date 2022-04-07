@@ -13,7 +13,7 @@ describe('BaseInput', function () {
   before(function () {
     this.input = new BaseInput()
     this.input.id = 'T' // Test
-    this.input.dispatch = dispatcher
+    this.input.on('input', dispatcher)
   })
 
   describe('constants', function () {
@@ -46,10 +46,6 @@ describe('BaseInput', function () {
     it('sets enabled to true', function () {
       expect(this.newInput.enabled).to.equal(true)
     })
-
-    it('sets default dispatch function', function () {
-      expect(this.newInput.dispatch.name).to.equal('unassignedFn')
-    })
   })
 
   describe('#process', function () {
@@ -63,7 +59,7 @@ describe('BaseInput', function () {
         this.input.enabled = true
       })
 
-      it('does not dispatch event', function () {
+      it('does not emit event', function () {
         expect(events).to.have.length(0)
       })
 
@@ -73,7 +69,7 @@ describe('BaseInput', function () {
     })
 
     context('when enabled is true', function () {
-      it('dispatches with correct handler', function () {
+      it('emits with correct handler', function () {
         this.input.process('4', true)
         expect(events[0][0]).to.equal('T')
         this.input.process('4', false)
@@ -127,7 +123,7 @@ describe('BaseInput', function () {
         expect(this.input.dds).to.have.length(0)
       })
 
-      it('dispatches single directions', function () {
+      it('emits single directions', function () {
         for (var direction of DIRECTIONS) {
           this.input.process(direction, true)
           expect(events[0][1]).to.equal(direction)
@@ -136,7 +132,7 @@ describe('BaseInput', function () {
         }
       })
 
-      it('dispatches diagonals', function () {
+      it('emits diagonals', function () {
         // Left
         this.input.process('4', true)
         this.input.process('2', true)
@@ -220,7 +216,7 @@ describe('BaseInput', function () {
     })
 
     describe('button', function () {
-      it('dispatches buttons correctly', function () {
+      it('emits buttons correctly', function () {
         for (var button of BUTTONS) {
           this.input.process(button)
           expect(events[0][1]).to.equal(button)

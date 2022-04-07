@@ -2,10 +2,12 @@
 
 'use strict'
 
+import EventEmitter from 'eventemitter3'
 import { DIRECTIONS } from './constants.js'
 
-export class BaseInput {
+export class BaseInput extends EventEmitter {
   constructor () {
+    super()
     this.id = null
     this.enabled = true
     this.dds = [] // Digital Directional State
@@ -13,7 +15,7 @@ export class BaseInput {
   }
 
   reset () {
-    this.dispatch = unassignedFn
+    this.removeAllListeners()
   }
 
   process (action, down) {
@@ -23,7 +25,7 @@ export class BaseInput {
     if (DIRECTIONS.indexOf(action) >= 0) {
       action = this.diagonalize(action, down)
     }
-    this.dispatch(this, action)
+    this.emit('input', this, action)
   }
 
   diagonalize (action, down) {
@@ -70,6 +72,3 @@ export class BaseInput {
     return '5'
   }
 }
-
-/* istanbul ignore next */
-function unassignedFn (_inputInstance, _inputEvent) {}

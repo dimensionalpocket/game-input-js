@@ -1,7 +1,7 @@
 {
   "name": "@dimensionalpocket/game-input",
   "version": "0.0.0",
-  "description": "GameInput object to parse controller input in Javascript games",
+  "description": "Input handler and normalizer for Javascript games",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -19,7 +19,9 @@
     "url": "https://github.com/dimensionalpocket/game-input-js/issues"
   },
   "homepage": "https://github.com/dimensionalpocket/game-input-js#readme",
-  "dependencies": {},
+  "dependencies": {
+    "eventemitter3": "4.0.7"
+  },
   "devDependencies": {
     "@dimensionalpocket/development": "github:dimensionalpocket/development-js#0.6.1",
     "@dimensionalpocket/release": "github:dimensionalpocket/release-js#0.2.4",
@@ -44,6 +46,6 @@
     ]
   },
   "engines": {
-    "node": ">= 14.17.1"
+    "node": ">= 16.14.2"
   }
 }

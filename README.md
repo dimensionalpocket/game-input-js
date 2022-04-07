@@ -2,11 +2,22 @@
 
 [![build](https://github.com/dimensionalpocket/game-input-js/actions/workflows/node.js.yml/badge.svg)](https://github.com/dimensionalpocket/game-input-js/actions/workflows/node.js.yml) [![Total alerts](https://img.shields.io/lgtm/alerts/g/dimensionalpocket/game-input-js.svg)](https://lgtm.com/projects/g/dimensionalpocket/game-input-js/alerts/) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/dimensionalpocket/game-input-js.svg)](https://lgtm.com/projects/g/dimensionalpocket/game-input-js/context:javascript)
 
-This repository provides classes to parse input from different controllers, parsing it into a common format.
+Input handler and normalizer for Javascript games.
+
+## Usage
+
+```js
+var input = new KeyboardInput()
+
+input.on('input', (handler, input) => {
+  // Example: pressing 'W' on the keyboard will emit '8' (up)
+  console.log('Pressed', input)
+})
+```
 
 ## Controller Layout
 
-All classes assume the following controller layout:
+Input from different controllers is mapped into the following normalized format:
 
 * `1` to `9` - directional state following Numpad convention, where `5` is neutral.
 * `A`, `B`, `C`, `X`, `Y`, `Z`, `L`, `R` - action buttons.
@@ -22,20 +33,23 @@ This is the class inherited by all input handlers.
 Properties:
 
 * `id` - ID of the handler. Should be the shortest string possible, as this value is sent over messaging to workers and remote connections.
-* `enabled` - when `true`, will call `dispatch()` on events. Set to `false` to temporarily halt input handling.
+* `enabled` - when `true`, will emit events. Set to `false` to temporarily halt input handling.
 
 Methods:
 
 * `process(event, state)` - parses input events.
-* `dispatch(handler, event)` - called when an input event occurs. Should be overwritten by external code. Takes the following arguments:
+
+Events:
+
+* `input (handler, event)` - emitted when an input event occurs. Takes the following arguments:
   * `handler` - the handler instance. Listeners will likely want the `id` property to detect which handler fired the event.
   * `event` - a one-character string that represents the input event.
 
-### Events
+### Inputs
 
-Event values are case-sensitive.
+Input values are case-sensitive.
 
-|Event Value|Description|
+|Input Value|Description|
 |---|---|
 |`"A"`|A pressed|
 |`"B"`|B pressed|
@@ -75,7 +89,7 @@ It relies on the `event.code` property, falling back to `event.which` and `event
 
 It also handles `keydown` events internally to avoid "input spamming" when the key is held down.
 
-It has a default ID of `"K"`.
+It has a default ID of `"Kb"`.
 
 It requires a `window` object in its constructor:
 
@@ -104,7 +118,7 @@ Default mappings:
 
 This handler is a subclass of `KeyboardInput` that maps its default keys to the right side of the keyboard, allowing two players to use the same keyboard locally.
 
-It has a default ID of `"N"`.
+It has a default ID of `"Np"`.
 
 Note: this handler is not supported by browsers that cannot read `event.code` events (such as Internet Explorer). That event is the only way to detect "NumpadEnter", otherwise it conflicts with the normal "Enter" key.
 
@@ -163,12 +177,12 @@ var router = new InputRouter()
 router.register(sequence1, sequence2, sequence3, sequence4)
 
 // Feed events to all sequences until complete sequences are captured.
-// The ID of the sequence will be returned on capture, false otherwise.
+// The sequence instance will be returned on capture, false otherwise.
 router.feed('2') // false
 router.feed('1') // false
 router.feed('4') // false
-router.feed('A') // '236A'
-router.feed('B') // 'B'
+router.feed('A') // sequence instance of '236A'
+router.feed('B') // sequence instance of 'B'
 ```
 
 ## Gamepad Support and Contributions

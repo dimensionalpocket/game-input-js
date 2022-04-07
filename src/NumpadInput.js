@@ -7,7 +7,7 @@ import { KeyboardInput } from './KeyboardInput.js'
 export class NumpadInput extends KeyboardInput {
   constructor (windowInstance) {
     super(windowInstance)
-    this.id = 'N'
+    this.id = 'Np'
   }
 
   defaults () {

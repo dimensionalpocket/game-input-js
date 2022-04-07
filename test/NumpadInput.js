@@ -24,7 +24,7 @@ function event (eventName, code, options) {
 describe('NumpadInput', function () {
   before(function () {
     this.input = new NumpadInput(windowInstance)
-    this.input.dispatch = dispatcher
+    this.input.on('input', dispatcher)
   })
 
   after(function () {

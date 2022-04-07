@@ -1,11 +1,6 @@
 {
   "extends": [
-    "github>dimensionalpocket/development-js//renovate/default"
-  ],
-  "packageRules": [
-    {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
-    }
+    "github>dimensionalpocket/development-js//renovate/default",
+    "github>dimensionalpocket/development-js//renovate/automerge"
   ]
 }

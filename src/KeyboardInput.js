@@ -11,7 +11,7 @@ export class KeyboardInput extends BaseInput {
       throw new Error('F-KI-WDW')
     }
     super()
-    this.id = 'K'
+    this.id = 'Kb'
     this.window = windowInstance
     this.assignmentsUp = new Map()
     this.assignmentsDown = new Map()
@@ -52,11 +52,17 @@ export class KeyboardInput extends BaseInput {
     this.process(action, false)
   }
 
-  onWindowBlur (event) {
+  onWindowBlur (_event) {
     this.process('5') // resets directional state
     this.actionsDown.clear()
   }
 
+  /**
+   * Captures a keyboard event.
+   *
+   * @param {any} event
+   * @param {boolean} down - `true` if key is being held down.
+   */
   capture (event, down) {
     // console.log('Capture Start', Date.now())
     var code = event.code
