@@ -1,6 +1,6 @@
 {
   "name": "@dimensionalpocket/game-input",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Input handler and normalizer for Javascript games",
   "main": "index.js",
   "type": "module",
