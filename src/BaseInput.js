@@ -25,7 +25,7 @@ export class BaseInput extends EventEmitter {
     if (DIRECTIONS.indexOf(action) >= 0) {
       action = this.diagonalize(action, down)
     }
-    this.emit('input', this, action)
+    this.emit('input', action, this)
   }
 
   diagonalize (action, down) {

@@ -9,9 +9,9 @@ Input handler and normalizer for Javascript games.
 ```js
 var input = new KeyboardInput()
 
-input.on('input', (handler, input) => {
-  // Example: pressing 'W' on the keyboard will emit '8' (up)
-  console.log('Pressed', input)
+input.on('input', (value) => {
+  // By default, pressing 'W' on the keyboard will emit '8' (directional up)
+  console.log('Pressed', value)
 })
 ```
 
@@ -41,9 +41,9 @@ Methods:
 
 Events:
 
-* `input (handler, event)` - emitted when an input event occurs. Takes the following arguments:
-  * `handler` - the handler instance. Listeners will likely want the `id` property to detect which handler fired the event.
-  * `event` - a one-character string that represents the input event.
+* `input (value, handler)` - emitted when an input event occurs. The listener receives the following arguments:
+  * `value` - a one-character string that represents the input event. See __Inputs__ section below.
+  * `handler` - the handler instance.
 
 ### Inputs
 

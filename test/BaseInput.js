@@ -7,7 +7,7 @@ import { BaseInput } from '../src/BaseInput.js'
 import { DIRECTIONS, BUTTONS } from '../src/constants.js'
 
 var events = []
-function dispatcher (handler, event) { events.unshift([handler.id, event]) }
+function dispatcher (event, handler) { events.unshift([handler.id, event]) }
 
 describe('BaseInput', function () {
   before(function () {

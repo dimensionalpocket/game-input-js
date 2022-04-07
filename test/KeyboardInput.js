@@ -7,7 +7,7 @@ import { JSDOM } from 'jsdom'
 import { KeyboardInput } from '../src/KeyboardInput.js'
 
 var events = []
-function dispatcher (handler, event) { events.unshift([handler.id, event]) }
+function dispatcher (event, handler) { events.unshift([handler.id, event]) }
 
 var dom = new JSDOM('', {})
 
