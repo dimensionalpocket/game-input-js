@@ -1,7 +1,10 @@
-name: Node.js Build
+name: Node.js
 
-on: push
+on:
+  pull_request:
+  push:
+    branches: main
 
 jobs:
-  build:
+  default:
     uses: dimensionalpocket/development-js/.github/workflows/default-node-build.yml@0.6.1

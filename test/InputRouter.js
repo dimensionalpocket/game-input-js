@@ -71,52 +71,52 @@ describe('InputRouter', function () {
   })
 
   describe('#feed', function () {
-    it('returns sequence ID on completion', function () {
+    it('returns sequence on completion', function () {
       var router = this.router
-      expect(router.feed(DIRECTION_NEUTRAL)).to.equal('5')
-      expect(router.feed(DIRECTION_LEFT)).to.equal('4')
-      expect(router.feed(DIRECTION_RIGHT)).to.equal('6')
+      expect(router.feed(DIRECTION_NEUTRAL).id).to.equal('5')
+      expect(router.feed(DIRECTION_LEFT).id).to.equal('4')
+      expect(router.feed(DIRECTION_RIGHT).id).to.equal('6')
       expect(router.feed(DIRECTION_DOWN)).to.equal(false)
       expect(router.feed(DIRECTION_DOWN_RIGHT)).to.equal(false)
-      expect(router.feed(DIRECTION_RIGHT)).to.equal('6')
-      expect(router.feed(BUTTON_A)).to.equal('236A')
+      expect(router.feed(DIRECTION_RIGHT).id).to.equal('6')
+      expect(router.feed(BUTTON_A).id).to.equal('236A')
       expect(router.feed(DIRECTION_DOWN)).to.equal(false)
       expect(router.feed(DIRECTION_DOWN_RIGHT)).to.equal(false)
-      expect(router.feed(DIRECTION_RIGHT)).to.equal('6')
-      expect(router.feed(BUTTON_A)).to.equal('236236A')
+      expect(router.feed(DIRECTION_RIGHT).id).to.equal('6')
+      expect(router.feed(BUTTON_A).id).to.equal('236236A')
     })
 
-    context('with fighter at 2P orientation', function () {
+    context('when flipped', function () {
       before(function () {
-        this.router.fighter = { orientation: -1 }
+        this.router.flipped = true
         this.counter.set(300) // expire all steps
       })
 
       after(function () {
-        this.router.fighter = null
+        this.router.flipped = false
       })
 
       it('flips commands horizontally', function () {
         var router = this.router
-        expect(router.feed(DIRECTION_NEUTRAL)).to.equal('5')
-        expect(router.feed(DIRECTION_LEFT)).to.equal('6')
-        expect(router.feed(DIRECTION_RIGHT)).to.equal('4')
+        expect(router.feed(DIRECTION_NEUTRAL).id).to.equal('5')
+        expect(router.feed(DIRECTION_LEFT).id).to.equal('6')
+        expect(router.feed(DIRECTION_RIGHT).id).to.equal('4')
         expect(router.feed(DIRECTION_DOWN)).to.equal(false)
         expect(router.feed(DIRECTION_DOWN_RIGHT)).to.equal(false)
-        expect(router.feed(DIRECTION_RIGHT)).to.equal('4')
+        expect(router.feed(DIRECTION_RIGHT).id).to.equal('4')
         expect(router.feed(BUTTON_A)).to.equal(false)
         expect(router.feed(DIRECTION_DOWN)).to.equal(false)
         expect(router.feed(DIRECTION_DOWN_RIGHT)).to.equal(false)
-        expect(router.feed(DIRECTION_RIGHT)).to.equal('4')
+        expect(router.feed(DIRECTION_RIGHT).id).to.equal('4')
         expect(router.feed(BUTTON_A)).to.equal(false)
         expect(router.feed(DIRECTION_DOWN)).to.equal(false)
         expect(router.feed(DIRECTION_DOWN_LEFT)).to.equal(false)
-        expect(router.feed(DIRECTION_LEFT)).to.equal('6')
-        expect(router.feed(BUTTON_A)).to.equal('236A')
+        expect(router.feed(DIRECTION_LEFT).id).to.equal('6')
+        expect(router.feed(BUTTON_A).id).to.equal('236A')
         expect(router.feed(DIRECTION_DOWN)).to.equal(false)
         expect(router.feed(DIRECTION_DOWN_LEFT)).to.equal(false)
-        expect(router.feed(DIRECTION_LEFT)).to.equal('6')
-        expect(router.feed(BUTTON_A)).to.equal('236236A')
+        expect(router.feed(DIRECTION_LEFT).id).to.equal('6')
+        expect(router.feed(BUTTON_A).id).to.equal('236236A')
       })
     })
   })
