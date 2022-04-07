@@ -7,7 +7,7 @@ Input handler and normalizer for Javascript games.
 ## Usage
 
 ```js
-var input = new KeyboardInput()
+var input = new KeyboardInput(window)
 
 input.on('input', (value) => {
   // By default, pressing 'W' on the keyboard will emit '8' (directional up)
