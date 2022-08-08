@@ -29,6 +29,7 @@ export class KeyboardInput extends BaseInput {
   }
 
   onKeyDown (event) {
+    var timestamp = Date.now()
     if (event.repeat === true) { // Supported by some browsers
       return
     }
@@ -40,20 +41,21 @@ export class KeyboardInput extends BaseInput {
       return
     }
     this.actionsDown.set(action, true)
-    this.process(action, true)
+    this.process(action, true, timestamp)
   }
 
   onKeyUp (event) {
+    var timestamp = Date.now()
     var action = this.capture(event, false)
     if (!action) {
       return
     }
     this.actionsDown.set(action.toUpperCase(), false)
-    this.process(action, false)
+    this.process(action, false, timestamp)
   }
 
   onWindowBlur (_event) {
-    this.process('5') // resets directional state
+    this.process('5', false, Date.now()) // resets directional state
     this.actionsDown.clear()
   }
 
@@ -64,7 +66,6 @@ export class KeyboardInput extends BaseInput {
    * @param {boolean} down - `true` if key is being held down.
    */
   capture (event, down) {
-    // console.log('Capture Start', Date.now())
     var code = event.code
     if (code) {
       return this.captureCode(code, down, event)

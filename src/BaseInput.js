@@ -18,14 +18,20 @@ export class BaseInput extends EventEmitter {
     this.removeAllListeners()
   }
 
-  process (action, down) {
+  /**
+   * @param {string} action
+   * @param {boolean} down
+   * @param {number} [timestamp]
+   * @returns
+   */
+  process (action, down, timestamp = undefined) {
     if (!this.enabled) {
       return
     }
     if (DIRECTIONS.indexOf(action) >= 0) {
       action = this.diagonalize(action, down)
     }
-    this.emit('input', action, this)
+    this.emit('input', action, this, timestamp)
   }
 
   diagonalize (action, down) {

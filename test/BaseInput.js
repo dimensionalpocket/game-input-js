@@ -218,9 +218,9 @@ describe('BaseInput', function () {
     describe('button', function () {
       it('emits buttons correctly', function () {
         for (var button of BUTTONS) {
-          this.input.process(button)
+          this.input.process(button, true)
           expect(events[0][1]).to.equal(button)
-          this.input.process(button.toLowerCase())
+          this.input.process(button.toLowerCase(), false)
           expect(events[0][1]).to.equal(button.toLowerCase())
         }
       })
