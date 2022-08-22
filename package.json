@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/dimensionalpocket/game-input-js#readme",
   "dependencies": {
+    "@dimensionalpocket/timer": "github:dimensionalpocket/timer-js#counter",
     "eventemitter3": "4.0.7"
   },
   "devDependencies": {

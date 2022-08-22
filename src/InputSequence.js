@@ -13,18 +13,18 @@ export class InputSequence {
     this.modifier = 1 // skill performance modifier
     this.priority = 0 // skill priority in InputRouter (higher runs first)
     this.pristine = false
-    this._counter = null
+    this._timer = null
   }
 
-  set counter (counter) {
-    this._counter = counter
+  set timer (timer) {
+    this._timer = timer
     for (var step of this.steps) {
-      step.counter = counter
+      step.timer = timer
     }
   }
 
-  // get counter () {
-  //   return this._counter
+  // get timer () {
+  //   return this._timer
   // }
 
   // Returns true if sequence completes.
@@ -89,7 +89,7 @@ export class InputSequence {
   // }
 
   registerStep (step) {
-    step.counter = this._counter
+    step.timer = this._timer
     this.steps.push(step)
     var l = this.steps.length
     if (l === 1) {

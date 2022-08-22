@@ -8,18 +8,18 @@ export class InputRouter {
   constructor () {
     this.flipped = false // when `true`, flips input horizontally
     this.sequences = []
-    this._counter = null
+    this._timer = null
   }
 
-  set counter (counter) {
-    this._counter = counter
+  set timer (timer) {
+    this._timer = timer
     for (var sequence of this.sequences) {
-      sequence.counter = counter
+      sequence.timer = timer
     }
   }
 
-  // get counter () {
-  //   return this._counter
+  // get timer () {
+  //   return this._timer
   // }
 
   register (sequence) {

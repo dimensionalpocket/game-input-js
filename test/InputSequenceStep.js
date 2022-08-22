@@ -3,7 +3,7 @@
 'use strict'
 
 import { expect } from '@dimensionalpocket/development'
-import { Counter } from '../src/Counter.js'
+import { Timer } from '@dimensionalpocket/timer/src/Timer.js'
 import { InputSequenceStep } from '../src/InputSequenceStep.js'
 import {
   ALL_INPUTS,
@@ -23,9 +23,9 @@ import {
 
 describe('InputSequenceStep', function () {
   before(function () {
-    this.counter = new Counter()
+    this.timer = new Timer()
     this.subject = new InputSequenceStep()
-    this.subject.counter = this.counter
+    this.subject.timer = this.timer
   })
 
   describe('constructor', function () {
@@ -56,13 +56,13 @@ describe('InputSequenceStep', function () {
       })
 
       it('sets the current frame number', function () {
-        this.counter.set(1)
+        this.timer.counter = 1
         this.subject.feed(BUTTON_A)
         expect(this.subject.frame).to.equal(1)
-        this.counter.set(2)
+        this.timer.counter = 2
         this.subject.feed(BUTTON_B)
         expect(this.subject.frame).to.equal(2)
-        this.counter.set(3)
+        this.timer.counter = 3
         this.subject.feed(BUTTON_C) // not watched
         expect(this.subject.frame).to.equal(2)
       })
@@ -97,13 +97,13 @@ describe('InputSequenceStep', function () {
       })
 
       it('sets the current frame number', function () {
-        this.counter.set(1)
+        this.timer.counter = 1
         this.subject.feed(DIRECTION_DOWN_LEFT)
         expect(this.subject.frame).to.equal(1)
-        this.counter.set(2)
+        this.timer.counter = 2
         this.subject.feed(DIRECTION_LEFT)
         expect(this.subject.frame).to.equal(2)
-        this.counter.set(3)
+        this.timer.counter = 3
         this.subject.feed(DIRECTION_RIGHT) // not watched
         expect(this.subject.frame).to.equal(2)
       })
@@ -111,11 +111,11 @@ describe('InputSequenceStep', function () {
   })
 
   describe('#valid', function () {
-    context('when no counter is set', function () {
+    context('when no timer is set', function () {
       before(function () {
         this.subject.clear()
-        this.subject.frame = this.counter.current
-        this.subject.counter = null
+        this.subject.frame = this.timer.counter
+        this.subject.timer = null
       })
 
       it('returns false', function () {
@@ -126,7 +126,7 @@ describe('InputSequenceStep', function () {
     context('when no frame is set', function () {
       before(function () {
         this.subject.clear()
-        this.subject.counter = this.counter
+        this.subject.timer = this.timer
         this.subject.frame = null
       })
 
@@ -135,19 +135,19 @@ describe('InputSequenceStep', function () {
       })
     })
 
-    context('when counter and frame are set', function () {
+    context('when timer and frame are set', function () {
       before(function () {
         this.subject.expiration = 30
         this.subject.clear()
-        this.subject.counter = this.counter
+        this.subject.timer = this.timer
         this.subject.watch(BUTTON_A)
       })
 
       context('and input did not expire', function () {
         before(function () {
-          this.counter.set(1)
+          this.timer.counter = 1
           this.subject.feed(BUTTON_A)
-          this.counter.set(25)
+          this.timer.counter = 25
         })
 
         it('returns true', function () {
@@ -157,9 +157,9 @@ describe('InputSequenceStep', function () {
 
       context('and input expired', function () {
         before(function () {
-          this.counter.set(1)
+          this.timer.counter = 1
           this.subject.feed(BUTTON_A)
-          this.counter.set(35)
+          this.timer.counter = 35
         })
 
         it('returns false', function () {
@@ -177,10 +177,10 @@ describe('InputSequenceStep', function () {
       })
 
       it('returns true if input is charged long enough', function () {
-        this.counter.set(1)
+        this.timer.counter = 1
         this.subject.feed(DIRECTION_LEFT)
         expect(this.subject.valid()).to.equal(false)
-        this.counter.set(61)
+        this.timer.counter = 61
         expect(this.subject.valid()).to.equal(true)
       })
     })
