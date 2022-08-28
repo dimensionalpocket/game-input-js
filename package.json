@@ -23,7 +23,7 @@
     "eventemitter3": "4.0.7"
   },
   "devDependencies": {
-    "@dimensionalpocket/development": "github:dimensionalpocket/development-js#0.7.0",
+    "@dimensionalpocket/development": "github:dimensionalpocket/development-js#1.0.2",
     "@dimensionalpocket/release": "github:dimensionalpocket/release-js#0.3.3",
     "jsdom": "19.0.0"
   },
