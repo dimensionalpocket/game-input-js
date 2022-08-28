@@ -6,8 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "npm run lint && NODE_ENV=test c8 mocha",
-    "lint": "standardx --fix --verbose",
-    "release": "release-it --config ./node_modules/@dimensionalpocket/release/config/default.cjs"
+    "lint": "standardx --fix --verbose"
   },
   "repository": {
     "type": "git",
@@ -20,11 +19,11 @@
   },
   "homepage": "https://github.com/dimensionalpocket/game-input-js#readme",
   "dependencies": {
+    "@dimensionalpocket/timer": "github:dimensionalpocket/timer-js#0.3.0",
     "eventemitter3": "4.0.7"
   },
   "devDependencies": {
-    "@dimensionalpocket/development": "github:dimensionalpocket/development-js#0.7.0",
-    "@dimensionalpocket/release": "github:dimensionalpocket/release-js#0.3.3",
+    "@dimensionalpocket/development": "github:dimensionalpocket/development-js#1.0.2",
     "jsdom": "19.0.0"
   },
   "babel": {

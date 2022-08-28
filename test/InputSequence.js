@@ -3,7 +3,7 @@
 'use strict'
 
 import { expect } from '@dimensionalpocket/development'
-import { Counter } from '../src/Counter.js'
+import { Timer } from '@dimensionalpocket/timer/src/Timer.js'
 import { InputSequence } from '../src/InputSequence.js'
 import {
 //  ALL_INPUTS,
@@ -26,7 +26,7 @@ import {
 
 describe('InputSequence', function () {
   before(function () {
-    this.counter = new Counter()
+    this.timer = new Timer()
   })
 
   describe('#register', function () {
@@ -36,7 +36,9 @@ describe('InputSequence', function () {
       this.subject.register(DIRECTION_DOWN_RIGHT)
       this.subject.register(DIRECTION_RIGHT)
       this.subject.register(BUTTON_A)
-      this.subject.counter = this.counter
+
+      // @ts-ignore
+      this.subject.timer = this.timer
     })
 
     it('registers the correct amount of steps', function () {
@@ -77,7 +79,7 @@ describe('InputSequence', function () {
   describe('#feed', function () {
     before(function () {
       this.subject = new InputSequence()
-      this.subject.counter = this.counter
+      this.subject.timer = this.timer
       this.subject.register(DIRECTION_DOWN)
       this.subject.register(DIRECTION_DOWN_RIGHT)
       this.subject.register(DIRECTION_RIGHT)
@@ -87,7 +89,7 @@ describe('InputSequence', function () {
     context('without steps', function () {
       before(function () {
         this.subject = new InputSequence()
-        this.subject.counter = this.counter
+        this.subject.timer = this.timer
       })
 
       it('returns false', function () {
@@ -101,24 +103,24 @@ describe('InputSequence', function () {
     it('returns true when it completes', function () {
       var result
       var steps = this.subject.steps
-      this.counter.set(1)
+      this.timer.counter = 1
       expect(this.subject.next).to.equal(steps[0])
       result = this.subject.feed(DIRECTION_DOWN)
       expect(result).to.equal(false)
       expect(this.subject.next).to.equal(steps[1])
-      this.counter.set(2)
+      this.timer.counter = 2
       result = this.subject.feed(DIRECTION_DOWN_RIGHT)
       expect(result).to.equal(false)
       expect(this.subject.next).to.equal(steps[2])
-      this.counter.set(3)
+      this.timer.counter = 3
       result = this.subject.feed(DIRECTION_RIGHT)
       expect(result).to.equal(false)
       expect(this.subject.next).to.equal(steps[3])
-      this.counter.set(4)
+      this.timer.counter = 4
       result = this.subject.feed(BUTTON_B) // dirty input, shouldn't reset sequence
       expect(result).to.equal(false)
       expect(this.subject.next).to.equal(steps[3])
-      this.counter.set(5)
+      this.timer.counter = 5
       result = this.subject.feed(BUTTON_A)
       expect(result).to.equal(true)
       expect(this.subject.next).to.equal(steps[0]) // resets sequence
@@ -127,20 +129,20 @@ describe('InputSequence', function () {
     it('returns false if any of the steps expire', function () {
       var result
       var steps = this.subject.steps
-      this.counter.set(1)
+      this.timer.counter = 1
       expect(this.subject.next).to.equal(steps[0])
       result = this.subject.feed(DIRECTION_DOWN)
       expect(result).to.equal(false)
       expect(this.subject.next).to.equal(steps[1])
-      this.counter.set(35) // makes previous step expire
+      this.timer.counter = 35 // makes previous step expire
       result = this.subject.feed(DIRECTION_DOWN_RIGHT)
       expect(result).to.equal(false)
       expect(this.subject.next).to.equal(steps[0]) // reset sequence
-      this.counter.set(36)
+      this.timer.counter = 36
       result = this.subject.feed(DIRECTION_RIGHT)
       expect(result).to.equal(false)
       expect(this.subject.next).to.equal(steps[0])
-      this.counter.set(37)
+      this.timer.counter = 37
       result = this.subject.feed(BUTTON_A)
       expect(result).to.equal(false)
       expect(this.subject.next).to.equal(steps[0])
@@ -152,23 +154,25 @@ describe('InputSequence', function () {
         this.subject.registerAny([DIRECTION_LEFT, DIRECTION_DOWN_LEFT])
         this.subject.register(DIRECTION_RIGHT)
         this.subject.register(BUTTON_A)
-        this.subject.counter = this.counter
+
+        // @ts-ignore
+        this.subject.timer = this.timer
       })
 
       it('works with the given inputs', function () {
         var result
-        this.counter.set(1)
+        this.timer.counter = 1
         this.subject.feed(DIRECTION_DOWN_LEFT)
-        this.counter.set(2)
+        this.timer.counter = 2
         this.subject.feed(DIRECTION_RIGHT)
-        this.counter.set(3)
+        this.timer.counter = 3
         result = this.subject.feed(BUTTON_A)
         expect(result).to.equal(true)
-        this.counter.set(4)
+        this.timer.counter = 4
         this.subject.feed(DIRECTION_LEFT)
-        this.counter.set(5)
+        this.timer.counter = 5
         this.subject.feed(DIRECTION_RIGHT)
-        this.counter.set(6)
+        this.timer.counter = 6
         result = this.subject.feed(BUTTON_A)
         expect(result).to.equal(true)
       })
@@ -186,28 +190,28 @@ describe('InputSequence', function () {
       it('returns false when dirty input is present', function () {
         var result
         var steps = this.subject.steps
-        this.counter.set(1)
+        this.timer.counter = 1
         expect(this.subject.next).to.equal(steps[0])
         result = this.subject.feed(DIRECTION_DOWN)
         expect(result).to.equal(false)
         expect(this.subject.next).to.equal(steps[1])
-        this.counter.set(2)
+        this.timer.counter = 2
         result = this.subject.feed(DIRECTION_DOWN_RIGHT)
         expect(result).to.equal(false)
         expect(this.subject.next).to.equal(steps[2])
-        this.counter.set(3)
+        this.timer.counter = 3
         result = this.subject.feed(DIRECTION_RIGHT)
         expect(result).to.equal(false)
         expect(this.subject.next).to.equal(steps[3])
-        this.counter.set(4)
+        this.timer.counter = 4
         result = this.subject.feed(DIRECTION_DOWN) // dirty input equal to first step
         expect(result).to.equal(false)
         expect(this.subject.next).to.equal(steps[1])
-        this.counter.set(5)
+        this.timer.counter = 5
         result = this.subject.feed(BUTTON_B) // dirty input different from first step
         expect(result).to.equal(false)
         expect(this.subject.next).to.equal(steps[0])
-        this.counter.set(6)
+        this.timer.counter = 6
         result = this.subject.feed(BUTTON_A)
         expect(result).to.equal(false)
         expect(this.subject.next).to.equal(steps[0])
@@ -216,20 +220,20 @@ describe('InputSequence', function () {
       it('returns true without dirty inputs', function () {
         var result
         var steps = this.subject.steps
-        this.counter.set(1)
+        this.timer.counter = 1
         expect(this.subject.next).to.equal(steps[0])
         result = this.subject.feed(DIRECTION_DOWN)
         expect(result).to.equal(false)
         expect(this.subject.next).to.equal(steps[1])
-        this.counter.set(2)
+        this.timer.counter = 2
         result = this.subject.feed(DIRECTION_DOWN_RIGHT)
         expect(result).to.equal(false)
         expect(this.subject.next).to.equal(steps[2])
-        this.counter.set(3)
+        this.timer.counter = 3
         result = this.subject.feed(DIRECTION_RIGHT)
         expect(result).to.equal(false)
         expect(this.subject.next).to.equal(steps[3])
-        this.counter.set(4)
+        this.timer.counter = 4
         result = this.subject.feed(BUTTON_A)
         expect(result).to.equal(true)
         expect(this.subject.next).to.equal(steps[0]) // resets sequence
@@ -238,24 +242,24 @@ describe('InputSequence', function () {
       it('returns true when dirty input is neutral direction', function () {
         var result
         var steps = this.subject.steps
-        this.counter.set(1)
+        this.timer.counter = 1
         expect(this.subject.next).to.equal(steps[0])
         result = this.subject.feed(DIRECTION_DOWN)
         expect(result).to.equal(false)
         expect(this.subject.next).to.equal(steps[1])
-        this.counter.set(2)
+        this.timer.counter = 2
         result = this.subject.feed(DIRECTION_DOWN_RIGHT)
         expect(result).to.equal(false)
         expect(this.subject.next).to.equal(steps[2])
-        this.counter.set(3)
+        this.timer.counter = 3
         result = this.subject.feed(DIRECTION_RIGHT)
         expect(result).to.equal(false)
         expect(this.subject.next).to.equal(steps[3])
-        this.counter.set(4)
+        this.timer.counter = 4
         result = this.subject.feed(DIRECTION_NEUTRAL)
         expect(result).to.equal(false)
         expect(this.subject.next).to.equal(steps[3])
-        this.counter.set(5)
+        this.timer.counter = 5
         result = this.subject.feed(BUTTON_A)
         expect(result).to.equal(true)
         expect(this.subject.next).to.equal(steps[0]) // resets sequence

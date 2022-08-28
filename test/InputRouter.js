@@ -5,7 +5,8 @@
 import { expect } from '@dimensionalpocket/development'
 import { InputRouter } from '../src/InputRouter.js'
 import { InputSequence } from '../src/InputSequence.js'
-import { Counter } from '../src/Counter.js'
+import { Timer } from '@dimensionalpocket/timer/src/Timer.js'
+
 import {
   DIRECTION_NEUTRAL,
   DIRECTION_LEFT,
@@ -18,7 +19,7 @@ import {
 
 describe('InputRouter', function () {
   before(function () {
-    this.counter = new Counter()
+    this.timer = new Timer()
     this.s236A = new InputSequence('236A')
     this.s236A.register(DIRECTION_DOWN)
     this.s236A.register(DIRECTION_DOWN_RIGHT)
@@ -49,14 +50,14 @@ describe('InputRouter', function () {
     this.router.register(this.s236A)
     this.router.register(this.s236236A)
 
-    this.router.counter = this.counter
+    this.router.timer = this.timer
   })
 
-  it('propagates counters to all steps', function () {
+  it('propagates timers to all steps', function () {
     var q, s
     for (q of this.router.sequences) {
       for (s of q.steps) {
-        expect(s.counter).to.equal(this.counter)
+        expect(s.timer).to.equal(this.timer)
       }
     }
   })
@@ -89,7 +90,7 @@ describe('InputRouter', function () {
     context('when flipped', function () {
       before(function () {
         this.router.flipped = true
-        this.counter.set(300) // expire all steps
+        this.timer.counter = 300 // expire all steps
       })
 
       after(function () {

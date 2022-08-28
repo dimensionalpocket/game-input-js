@@ -1,0 +1,9 @@
+name: Release
+
+on:
+  push:
+    branches: main
+
+jobs:
+  default:
+    uses: dimensionalpocket/development-js/.github/workflows/default-release.yml@1.0.2

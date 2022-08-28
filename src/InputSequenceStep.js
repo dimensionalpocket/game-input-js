@@ -8,7 +8,7 @@ export class InputSequenceStep {
   constructor () {
     this.previous = null // previous step, set by sequence
     this.next = null // next step, set by sequence
-    this.counter = null
+    this.timer = null
     this.frame = null // frame number this step completed at
     this.expiration = 30 // in-between frames until step expires
     this.buffer = 5 // multi-press buffer
@@ -29,7 +29,7 @@ export class InputSequenceStep {
   feed (event) {
     var watching = this.watching[event]
     if (watching) {
-      this.frame = this.counter.current
+      this.frame = this.timer.counter
     }
     if (this.any) {
       return watching
@@ -43,11 +43,11 @@ export class InputSequenceStep {
     if (!frame && frame !== 0) {
       return false
     }
-    var counter = this.counter
-    if (!counter) {
+    var timer = this.timer
+    if (!timer) {
       return false
     }
-    var delta = counter.current - frame
+    var delta = timer.counter - frame
     var charge = this.charge
     if (charge > 0) {
       // when charge is present, step never expires
