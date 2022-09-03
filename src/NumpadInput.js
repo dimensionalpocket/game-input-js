@@ -4,6 +4,13 @@
 
 import { KeyboardInput } from './KeyboardInput.js'
 
+import {
+  DIRECTION_DOWN,
+  DIRECTION_LEFT,
+  DIRECTION_RIGHT,
+  DIRECTION_UP
+} from './constants.js'
+
 export class NumpadInput extends KeyboardInput {
   constructor (windowInstance) {
     super(windowInstance)
@@ -13,10 +20,10 @@ export class NumpadInput extends KeyboardInput {
   defaults () {
     this.assignmentsUp.clear()
     this.assignmentsDown.clear()
-    this.assign('ArrowUp', '8')
-    this.assign('ArrowLeft', '4')
-    this.assign('ArrowDown', '2')
-    this.assign('ArrowRight', '6')
+    this.assign('ArrowUp', DIRECTION_UP)
+    this.assign('ArrowLeft', DIRECTION_LEFT)
+    this.assign('ArrowDown', DIRECTION_DOWN)
+    this.assign('ArrowRight', DIRECTION_RIGHT)
     this.assign('Numpad7', 'X')
     this.assign('Numpad8', 'Y')
     this.assign('Numpad9', 'Z')

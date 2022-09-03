@@ -3,7 +3,19 @@
 'use strict'
 
 import EventEmitter from 'eventemitter3'
-import { DIRECTIONS } from './constants.js'
+
+import {
+  DIRECTIONS,
+  DIRECTION_DOWN,
+  DIRECTION_DOWN_LEFT,
+  DIRECTION_DOWN_RIGHT,
+  DIRECTION_LEFT,
+  DIRECTION_NEUTRAL,
+  DIRECTION_RIGHT,
+  DIRECTION_UP,
+  DIRECTION_UP_LEFT,
+  DIRECTION_UP_RIGHT
+} from './constants.js'
 
 export class BaseInput extends EventEmitter {
   constructor () {
@@ -46,7 +58,7 @@ export class BaseInput extends EventEmitter {
     }
     var len = pressed.length
     if (len === 0) {
-      return '5' // no directions pressed
+      return DIRECTION_NEUTRAL // no directions pressed
     }
     var last = pressed[len - 1]
     if (len === 1) {
@@ -54,27 +66,27 @@ export class BaseInput extends EventEmitter {
     }
     var previous = pressed[len - 2]
     // if-chain by priority
-    if (last === '2') {
-      if (previous === '4') return '1'
-      if (previous === '6') return '3'
-      return '2'
+    if (last === DIRECTION_DOWN) {
+      if (previous === DIRECTION_LEFT) return DIRECTION_DOWN_LEFT
+      if (previous === DIRECTION_RIGHT) return DIRECTION_DOWN_RIGHT
+      return DIRECTION_DOWN
     }
-    if (last === '4') {
-      if (previous === '2') return '1'
-      if (previous === '8') return '7'
-      return '4'
+    if (last === DIRECTION_LEFT) {
+      if (previous === DIRECTION_DOWN) return DIRECTION_DOWN_LEFT
+      if (previous === DIRECTION_UP) return DIRECTION_UP_LEFT
+      return DIRECTION_LEFT
     }
-    if (last === '6') {
-      if (previous === '2') return '3'
-      if (previous === '8') return '9'
-      return '6'
+    if (last === DIRECTION_RIGHT) {
+      if (previous === DIRECTION_DOWN) return DIRECTION_DOWN_RIGHT
+      if (previous === DIRECTION_UP) return DIRECTION_UP_RIGHT
+      return DIRECTION_RIGHT
     }
-    if (last === '8') {
-      if (previous === '6') return '9'
-      if (previous === '4') return '7'
-      return '8'
+    if (last === DIRECTION_UP) {
+      if (previous === DIRECTION_RIGHT) return DIRECTION_UP_RIGHT
+      if (previous === DIRECTION_LEFT) return DIRECTION_UP_LEFT
+      return DIRECTION_UP
     }
     console.warn('E-DDI-DG', pressed)
-    return '5'
+    return DIRECTION_NEUTRAL
   }
 }
