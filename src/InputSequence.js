@@ -26,7 +26,11 @@ export class InputSequence {
   //   return this._timer
   // }
 
-  // Returns true if sequence completes.
+  /**
+   * Returns true if sequence completes.
+   *
+   * @param {string} event
+   */
   feed (event) {
     var next = this.next
     if (!next) {
@@ -62,14 +66,22 @@ export class InputSequence {
     return true // sequence complete!
   }
 
-  register (event) {
-    var step = new InputSequenceStep()
+  /**
+   * @param {string} event
+   * @param {object} options
+   */
+  register (event, options = null) {
+    var step = new InputSequenceStep(options)
+
     step.watch(event)
     this.registerStep(step)
   }
 
-  registerAny (events) {
-    var step = new InputSequenceStep()
+  /**
+   * @param {Array<string>} events
+   */
+  registerAny (events, options = null) {
+    var step = new InputSequenceStep(options)
     for (var event of events) {
       step.watch(event)
     }
@@ -77,8 +89,8 @@ export class InputSequence {
     this.registerStep(step)
   }
 
-  // registerMultiple (events) {
-  //   var step = new InputSequenceStep()
+  // registerMultiple (events, options = null) {
+  //   var step = new InputSequenceStep(options)
   //   for (var event of events) {
   //     step.watch(event)
   //   }

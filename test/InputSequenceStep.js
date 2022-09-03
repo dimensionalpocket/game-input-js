@@ -36,6 +36,34 @@ describe('InputSequenceStep', function () {
     })
   })
 
+  describe('#configure', function () {
+    it('sets expiration', function () {
+      var step = new InputSequenceStep()
+      step.configure({ expiration: 5 })
+      expect(step.expiration).to.eq(5)
+    })
+
+    it('sets buffer', function () {
+      var step = new InputSequenceStep()
+      step.configure({ buffer: 6 })
+      expect(step.buffer).to.eq(6)
+    })
+
+    it('sets charge', function () {
+      var step = new InputSequenceStep()
+      step.configure({ charge: 7 })
+      expect(step.charge).to.eq(7)
+    })
+
+    it('does not change current values when given null', function () {
+      var step = new InputSequenceStep({ expiration: 1, buffer: 2, charge: 3 })
+      step.configure()
+      expect(step.expiration).to.eq(1)
+      expect(step.buffer).to.eq(2)
+      expect(step.charge).to.eq(3)
+    })
+  })
+
   describe('#watch/#unwatch', function () {
     it('sets watcher flag of given event to true or false', function () {
       expect(this.subject.watching[BUTTON_A]).to.equal(false)
