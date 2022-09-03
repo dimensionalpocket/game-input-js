@@ -16,10 +16,10 @@ export class InputSequenceStep {
     this.frame = null // frame number this step completed at
 
     // in-between frames until step expires
-    this.expiration = 30
+    this.expiration = 10
 
     // multi-press buffer
-    this.buffer = 5
+    this.buffer = 2
 
     // how long the input should be held down, in frames
     this.charge = 0
