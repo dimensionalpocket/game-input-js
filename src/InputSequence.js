@@ -3,7 +3,6 @@
 'use strict'
 
 import { InputSequenceStep } from './InputSequenceStep.js'
-import { DIRECTION_NEUTRAL } from './constants.js'
 
 export class InputSequence {
   constructor (id) {
@@ -41,9 +40,8 @@ export class InputSequence {
     }
     var fed = next.feed(event)
     if (!fed) {
-      if (this.pristine && event !== DIRECTION_NEUTRAL) {
+      if (this.pristine) {
         // dirty input: reset sequence
-        // neutral direction is ignored
         this.reset()
         next = this.next
         // check if dirty input equals first input
