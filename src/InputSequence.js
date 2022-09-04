@@ -9,9 +9,9 @@ export class InputSequence {
     this.id = id
     this.steps = []
     this.next = null // next step
-    this.modifier = 1 // skill performance modifier
     this.priority = 0 // skill priority in InputRouter (higher runs first)
     this.pristine = false
+    this.resetOnFlip = false
     this._timer = null
   }
 
@@ -33,21 +33,24 @@ export class InputSequence {
    */
   feed (event) {
     var next = this.next
+
     if (!next) {
       return false
     }
+
     var previous = next.previous
     if (previous && previous.valid() === false) {
       // previous step has expired
       this.reset()
       next = this.next
     }
+
     var fed = next.feed(event)
     if (!fed) {
       if (this.pristine) {
         // dirty input: reset sequence
         this.reset()
-        next = this.next
+        next = this.next // set to first step by reset()
         // check if dirty input equals first input
         // if true, will fall out of the if-else block and move to second step
         fed = next.feed(event)
@@ -58,10 +61,12 @@ export class InputSequence {
         return false
       }
     }
+
     if (next.next) {
       this.next = next.next
       return false // moved on to next step, but didn't complete
     }
+
     this.reset()
     return true // sequence complete!
   }

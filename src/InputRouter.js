@@ -6,9 +6,27 @@ import { REVERSIBLE_DIRECTIONS, OPPOSITES } from './constants.js'
 
 export class InputRouter {
   constructor () {
-    this.flipped = false // when `true`, flips input horizontally
     this.sequences = []
+    this._flipped = false // when `true`, flips input horizontally
     this._timer = null
+  }
+
+  set flipped (value) {
+    var oldValue = this._flipped
+    if (oldValue === value) return
+
+    this._flipped = value
+
+    // Reset sequences when the router is flipped.
+    for (var sequence of this.sequences) {
+      if (sequence.resetOnFlip) {
+        sequence.reset()
+      }
+    }
+  }
+
+  get flipped () {
+    return this._flipped
   }
 
   set timer (timer) {
@@ -33,7 +51,7 @@ export class InputRouter {
     var sequence
     var captured = false
     if (REVERSIBLE_DIRECTIONS.indexOf(event) >= 0) {
-      if (this.flipped) {
+      if (this._flipped) {
         event = OPPOSITES[event]
       }
     }
