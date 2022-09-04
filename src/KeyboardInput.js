@@ -5,6 +5,14 @@
 import { KeyCodes } from './KeyCodes.js'
 import { BaseInput } from './BaseInput.js'
 
+import {
+  DIRECTION_DOWN,
+  DIRECTION_LEFT,
+  DIRECTION_NEUTRAL,
+  DIRECTION_RIGHT,
+  DIRECTION_UP
+} from './constants.js'
+
 export class KeyboardInput extends BaseInput {
   constructor (windowInstance) {
     if (!windowInstance) {
@@ -55,7 +63,7 @@ export class KeyboardInput extends BaseInput {
   }
 
   onWindowBlur (_event) {
-    this.process('5', false, Date.now()) // resets directional state
+    this.process(DIRECTION_NEUTRAL, false, Date.now()) // resets directional state
     this.actionsDown.clear()
   }
 
@@ -101,10 +109,10 @@ export class KeyboardInput extends BaseInput {
   defaults () {
     this.assignmentsDown.clear()
     this.assignmentsUp.clear()
-    this.assign('KeyW', '8')
-    this.assign('KeyA', '4')
-    this.assign('KeyS', '2')
-    this.assign('KeyD', '6')
+    this.assign('KeyW', DIRECTION_UP)
+    this.assign('KeyA', DIRECTION_LEFT)
+    this.assign('KeyS', DIRECTION_DOWN)
+    this.assign('KeyD', DIRECTION_RIGHT)
     this.assign('KeyY', 'X')
     this.assign('KeyU', 'Y')
     this.assign('KeyI', 'Z')

@@ -6,6 +6,18 @@ import { expect } from '@dimensionalpocket/development'
 import { JSDOM } from 'jsdom'
 import { NumpadInput } from '../src/NumpadInput.js'
 
+import {
+  DIRECTION_DOWN,
+  DIRECTION_DOWN_LEFT,
+  DIRECTION_DOWN_RIGHT,
+  DIRECTION_LEFT,
+  DIRECTION_NEUTRAL,
+  DIRECTION_RIGHT,
+  DIRECTION_UP,
+  DIRECTION_UP_LEFT,
+  DIRECTION_UP_RIGHT
+} from '../src/constants.js'
+
 var events = []
 function dispatcher (event, handler) { events.unshift([handler.id, event]) }
 
@@ -34,25 +46,25 @@ describe('NumpadInput', function () {
   describe('#defaults', function () {
     it('assigns correct directions', function () {
       event('keydown', 'ArrowRight')
-      expect(events[0][1]).to.equal('6')
+      expect(events[0][1]).to.equal(DIRECTION_RIGHT)
       event('keydown', 'ArrowUp')
-      expect(events[0][1]).to.equal('9')
+      expect(events[0][1]).to.equal(DIRECTION_UP_RIGHT)
       event('keyup', 'ArrowRight')
-      expect(events[0][1]).to.equal('8')
+      expect(events[0][1]).to.equal(DIRECTION_UP)
       event('keydown', 'ArrowLeft')
-      expect(events[0][1]).to.equal('7')
+      expect(events[0][1]).to.equal(DIRECTION_UP_LEFT)
       event('keyup', 'ArrowUp')
-      expect(events[0][1]).to.equal('4')
+      expect(events[0][1]).to.equal(DIRECTION_LEFT)
       event('keydown', 'ArrowDown')
-      expect(events[0][1]).to.equal('1')
+      expect(events[0][1]).to.equal(DIRECTION_DOWN_LEFT)
       event('keyup', 'ArrowLeft')
-      expect(events[0][1]).to.equal('2')
+      expect(events[0][1]).to.equal(DIRECTION_DOWN)
       event('keydown', 'ArrowRight')
-      expect(events[0][1]).to.equal('3')
+      expect(events[0][1]).to.equal(DIRECTION_DOWN_RIGHT)
       event('keyup', 'ArrowDown')
-      expect(events[0][1]).to.equal('6')
+      expect(events[0][1]).to.equal(DIRECTION_RIGHT)
       event('keyup', 'ArrowLeft')
-      expect(events[0][1]).to.equal('5')
+      expect(events[0][1]).to.equal(DIRECTION_NEUTRAL)
     })
 
     it('assigns correct buttons', function () {

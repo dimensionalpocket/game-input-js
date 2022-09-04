@@ -20,8 +20,7 @@ import {
   DIRECTION_DOWN_LEFT,
   ALL_INPUTS
   // DIRECTION_UP_RIGHT,
-  // DIRECTION_UP,
-  // DIRECTION_NEUTRAL
+  // DIRECTION_UP
 } from '../src/constants.js'
 
 describe('InputSequence', function () {
@@ -238,31 +237,29 @@ describe('InputSequence', function () {
         expect(result).to.equal(true)
         expect(this.subject.next).to.equal(steps[0]) // resets sequence
       })
+    })
+  })
 
-      it('returns true when dirty input is neutral direction', function () {
+  describe('special cases', function () {
+    describe('double tap same direction', function () {
+      before(function () {
+        this.subject = new InputSequence()
+        // @ts-ignore
+        this.subject.timer = this.timer
+        this.subject.register(DIRECTION_RIGHT)
+        this.subject.register(DIRECTION_NEUTRAL)
+        this.subject.register(DIRECTION_RIGHT)
+      })
+
+      it('returns true with correct input', function () {
         var result
-        var steps = this.subject.steps
         this.timer.counter = 1
-        expect(this.subject.next).to.equal(steps[0])
-        result = this.subject.feed(DIRECTION_DOWN)
-        expect(result).to.equal(false)
-        expect(this.subject.next).to.equal(steps[1])
+        this.subject.feed(DIRECTION_RIGHT)
         this.timer.counter = 2
-        result = this.subject.feed(DIRECTION_DOWN_RIGHT)
-        expect(result).to.equal(false)
-        expect(this.subject.next).to.equal(steps[2])
+        this.subject.feed(DIRECTION_NEUTRAL)
         this.timer.counter = 3
         result = this.subject.feed(DIRECTION_RIGHT)
-        expect(result).to.equal(false)
-        expect(this.subject.next).to.equal(steps[3])
-        this.timer.counter = 4
-        result = this.subject.feed(DIRECTION_NEUTRAL)
-        expect(result).to.equal(false)
-        expect(this.subject.next).to.equal(steps[3])
-        this.timer.counter = 5
-        result = this.subject.feed(BUTTON_A)
         expect(result).to.equal(true)
-        expect(this.subject.next).to.equal(steps[0]) // resets sequence
       })
     })
   })

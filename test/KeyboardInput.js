@@ -6,6 +6,18 @@ import { expect } from '@dimensionalpocket/development'
 import { JSDOM } from 'jsdom'
 import { KeyboardInput } from '../src/KeyboardInput.js'
 
+import {
+  DIRECTION_DOWN,
+  DIRECTION_DOWN_LEFT,
+  DIRECTION_DOWN_RIGHT,
+  DIRECTION_LEFT,
+  DIRECTION_NEUTRAL,
+  DIRECTION_RIGHT,
+  DIRECTION_UP,
+  DIRECTION_UP_LEFT,
+  DIRECTION_UP_RIGHT
+} from '../src/constants.js'
+
 var events = []
 function dispatcher (event, handler) { events.unshift([handler.id, event]) }
 
@@ -70,23 +82,23 @@ describe('KeyboardInput', function () {
 
     it('captures event.code', function () {
       event('keydown', 'KeyW')
-      expect(events[0][1]).to.equal('8')
+      expect(events[0][1]).to.equal(DIRECTION_UP)
       event('keyup', 'KeyW')
-      expect(events[0][1]).to.equal('5')
+      expect(events[0][1]).to.equal(DIRECTION_NEUTRAL)
     })
 
     it('captures event.which', function () {
       event('keydown', undefined, { which: 87 })
-      expect(events[0][1]).to.equal('8')
+      expect(events[0][1]).to.equal(DIRECTION_UP)
       event('keyup', undefined, { which: 87 })
-      expect(events[0][1]).to.equal('5')
+      expect(events[0][1]).to.equal(DIRECTION_NEUTRAL)
     })
 
     it('captures event.keyCode', function () {
       event('keydown', undefined, { keyCode: 87 })
-      expect(events[0][1]).to.equal('8')
+      expect(events[0][1]).to.equal(DIRECTION_UP)
       event('keyup', undefined, { keyCode: 87 })
-      expect(events[0][1]).to.equal('5')
+      expect(events[0][1]).to.equal(DIRECTION_NEUTRAL)
     })
 
     it('calls preventDefault() on event', function () {
@@ -104,25 +116,25 @@ describe('KeyboardInput', function () {
   describe('#defaults', function () {
     it('assigns correct directions', function () {
       event('keydown', 'KeyD')
-      expect(events[0][1]).to.equal('6')
+      expect(events[0][1]).to.equal(DIRECTION_RIGHT)
       event('keydown', 'KeyW')
-      expect(events[0][1]).to.equal('9')
+      expect(events[0][1]).to.equal(DIRECTION_UP_RIGHT)
       event('keyup', 'KeyD')
-      expect(events[0][1]).to.equal('8')
+      expect(events[0][1]).to.equal(DIRECTION_UP)
       event('keydown', 'KeyA')
-      expect(events[0][1]).to.equal('7')
+      expect(events[0][1]).to.equal(DIRECTION_UP_LEFT)
       event('keyup', 'KeyW')
-      expect(events[0][1]).to.equal('4')
+      expect(events[0][1]).to.equal(DIRECTION_LEFT)
       event('keydown', 'KeyS')
-      expect(events[0][1]).to.equal('1')
+      expect(events[0][1]).to.equal(DIRECTION_DOWN_LEFT)
       event('keyup', 'KeyA')
-      expect(events[0][1]).to.equal('2')
+      expect(events[0][1]).to.equal(DIRECTION_DOWN)
       event('keydown', 'KeyD')
-      expect(events[0][1]).to.equal('3')
+      expect(events[0][1]).to.equal(DIRECTION_DOWN_RIGHT)
       event('keyup', 'KeyS')
-      expect(events[0][1]).to.equal('6')
+      expect(events[0][1]).to.equal(DIRECTION_RIGHT)
       event('keyup', 'KeyD')
-      expect(events[0][1]).to.equal('5')
+      expect(events[0][1]).to.equal(DIRECTION_NEUTRAL)
     })
 
     it('assigns correct buttons', function () {
@@ -177,7 +189,7 @@ describe('KeyboardInput', function () {
     })
 
     it('resets directional state', function () {
-      expect(events[0][1]).to.equal('5')
+      expect(events[0][1]).to.equal(DIRECTION_NEUTRAL)
     })
   })
 

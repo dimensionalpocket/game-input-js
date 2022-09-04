@@ -5,17 +5,42 @@
 import { InputState } from './InputState.js'
 
 export class InputSequenceStep {
-  constructor () {
+  /**
+   *
+   * @param {object} options
+   */
+  constructor (options = null) {
     this.previous = null // previous step, set by sequence
     this.next = null // next step, set by sequence
     this.timer = null
     this.frame = null // frame number this step completed at
-    this.expiration = 30 // in-between frames until step expires
-    this.buffer = 5 // multi-press buffer
-    this.charge = 0 // in frames
+
+    // in-between frames until step expires
+    this.expiration = 10
+
+    // multi-press buffer
+    this.buffer = 2
+
+    // how long the input should be held down, in frames
+    this.charge = 0
+
     this.watching = new InputState(false)
     this.held = new InputState(false)
+
     this.any = true // false if this step is multipress
+
+    this.configure(options)
+  }
+
+  /**
+   * @param {object} options
+   */
+  configure (options = null) {
+    if (options == null) return
+
+    if (options.expiration != null) this.expiration = options.expiration
+    if (options.buffer != null) this.buffer = options.buffer
+    if (options.charge != null) this.charge = options.charge
   }
 
   watch (event) {
